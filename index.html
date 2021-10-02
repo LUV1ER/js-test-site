@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>2 лаба</title>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">
+</head>
+<body>
+   <div class="wrapper">
+      <div class="header">
+         <div class="menu-wrap">
+            <img src="image/logo.png" class="menu-logo">
+            <input type="checkbox" id="menu-checkbox">
+            <nav>
+               <ul>
+                  <li><a href="#">Головна</a></li>
+                  <li><a href="#">Кошик</a></li>
+                  <li><a href="#">Контакти</a></li>
+               </ul>
+            </nav>
+            <label for="menu-checkbox">
+               <i class="fa fa-bars menu-icon"></i>
+            </label>
+         </div>
+         
+         <div class="custom">
+            <div class="custom-text" style="color: white"><h1>Дрилі та Болгарки</h1></div>
+         </div>
+      </div>
+   
+      <div class="main" id="mainD">
+         <div class="aside">
+            <select onchange="SetQuantity(this)">
+               <option selected value="8">8 на сторінці</option>
+               <option value="16">16 на сторінці</option>
+               <option value="24">24 на сторінці</option>
+               <option value="32">32 на сторінці</option>
+            </select>
+            <select onchange="SetSort(this)">
+               <option selected value="0">Сортувати по імені А-Я</option>
+               <option value="1">Сортувати по імені Я-А</option>
+               <option value="2">Сортувати по зростанню ціни</option>
+               <option value="3">Сортувати за зменшуванням ціни</option>
+            </select>
+            <button class="mybtn1" onclick=ResetFilters()>Скинути фільтри</button>
+            <p id="basketInformation">В кошику: 0 товарів</p>
+            <h2>Угруповання:</h2>
+            <div>
+               <p>Максимальна ціна</p>
+               <input type="number" id="high" onchange="Grouping()" class="minmaxprice">
+           </div>
+           <div>
+               <p>Мінімальна ціна</p>
+               <input type="number" id="low" onchange="Grouping()" class="minmaxprice">
+           </div>            
+            <div class="grouping"></div>
+         </div>
+         
+         <div class="content">
+            <div class="pagination">
+               <a href="javascript: ToStart();" class="pagination-main">&laquo;</a>
+               <a href="javascript: ToEnd();" class="pagination-main">&raquo;</a>
+            </div>
+         </div>
+      </div> 
+      
+      <div class="main" id="basketD" style="display: none;">
+         <div class="aside"></div>
+         <div class="content"  style="display:block;">
+            <div id="basketTable">
+               <h1>Кошик пустий.</h1>
+            </div>
+         </div>
+      </div>
+
+      <div class="footer">
+         <p>Тестовий сайт 2021 року</p>
+      </div> 
+   </div>
+
+   <script type="text/javascript">
+      //Функция добавления скрипта
+      const loadScript = (url) => (
+         new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+         
+            script.onload = () => resolve(script);
+            script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));
+         
+            document.head.append(script);
+         })
+      );
+      
+      //Грузим через async / await
+      async function Load() {
+         try {
+            await loadScript("./js/scriptProduct.js");
+            await loadScript("./js/scriptBasket.js");
+            await loadScript("./js/scriptConst.js");
+            await loadScript("./js/scriptMain.js");
+            await loadScript("./js/scriptSort.js");
+            InitDocument();
+         } catch(err) {
+            // перехватит любую ошибку в блоках выше
+            alert(err);
+         }
+      }  
+      Load();    
+      
+      </script>
+</body>
+</html>
